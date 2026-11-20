@@ -1,0 +1,11 @@
+{
+  "python_version": "3.14.7",
+  "system_status": "RESEARCH COMPLETE WITH LIMITATIONS",
+  "target_c": "FROZEN",
+  "feature_count": 27,
+  "model": "XGBoost v1.0.0",
+  "optimal_threshold": 0.35,
+  "historical_test_f1": 0.291,
+  "historical_test_prauc": 0.2449,
+  "historical_test_pr_lift": "1.60x"
+}

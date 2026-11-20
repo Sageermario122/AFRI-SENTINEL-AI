@@ -1,0 +1,74 @@
+[
+  {
+    "test_name": "Check 1: Future ACLED events in features",
+    "potential_leakage_source": "ACLED events occurring after month T included in month T features",
+    "status": "PASS",
+    "details": "ACLED event counts aggregated strictly within month T bounds (T_start <= date <= T_end)."
+  },
+  {
+    "test_name": "Check 2: Future GDELT news in features",
+    "potential_leakage_source": "GDELT articles published after month T included in month T features",
+    "status": "PASS",
+    "details": "GDELT SQLDATE filtered strictly to month T."
+  },
+  {
+    "test_name": "Check 3: Future World Bank indicator leakage",
+    "potential_leakage_source": "Un-lagged contemporaneous annual World Bank GDP/Inflation metrics",
+    "status": "PASS",
+    "details": "World Bank indicators joined with strict 1-year lag (Month T in Year Y uses World Bank Y-1)."
+  },
+  {
+    "test_name": "Check 4: Future V-Dem governance indicator leakage",
+    "potential_leakage_source": "Contemporaneous annual V-Dem democracy indices",
+    "status": "PASS",
+    "details": "V-Dem v16 governance metrics joined with strict 1-year lag (Month T uses V-Dem Y-1)."
+  },
+  {
+    "test_name": "Check 5: Future SIPRI military spending leakage",
+    "potential_leakage_source": "Contemporaneous defense budget figures",
+    "status": "PASS",
+    "details": "SIPRI defense spending metrics joined with strict 1-year lag (Month T uses SIPRI Y-1)."
+  },
+  {
+    "test_name": "Check 6: Future GTD terrorism data leakage",
+    "potential_leakage_source": "Falsely imputing post-2021 GTD records as zero",
+    "status": "PASS",
+    "details": "GTD features set to NaN (unavailable) for post-2021 periods rather than fake zeroes."
+  },
+  {
+    "test_name": "Check 7: Target-derived feature contamination",
+    "potential_leakage_source": "Features using target calculation or future T+1 activity",
+    "status": "PASS",
+    "details": "All features constructed strictly using information available at or before month T."
+  },
+  {
+    "test_name": "Check 8: Incorrect centered rolling windows",
+    "potential_leakage_source": "Centered rolling window averages taking future months",
+    "status": "PASS",
+    "details": "Growth rates and rolling averages use backward-looking shifts exclusively."
+  },
+  {
+    "test_name": "Check 9: Full-dataset scaler fitting",
+    "potential_leakage_source": "Fitting StandardScaler/MinMaxScaler on full dataset before split",
+    "status": "PASS",
+    "details": "Scaling postponed to Phase 3 model training pipeline (fit on Train only)."
+  },
+  {
+    "test_name": "Check 10: Random train/test split leakage",
+    "potential_leakage_source": "Randomly shuffling time-series rows across train and test sets",
+    "status": "PASS",
+    "details": "Strict chronological split enforced (Train: 2015-2021, Val: 2022, Test: 2023-2026)."
+  },
+  {
+    "test_name": "Check 11: Full-dataset missing value imputation",
+    "potential_leakage_source": "Imputing missing values using full-dataset statistics",
+    "status": "PASS",
+    "details": "No full-dataset mean/median imputation performed in preprocessing."
+  },
+  {
+    "test_name": "Check 12: Full-dataset feature selection leakage",
+    "potential_leakage_source": "Selecting features based on correlations with target across full dataset",
+    "status": "PASS",
+    "details": "Feature selection postponed to training phase on training set."
+  }
+]
